@@ -1,0 +1,17 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+
+button {
+  padding: 5px 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
