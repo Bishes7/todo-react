@@ -13,6 +13,11 @@ function App() {
     }
   };
 
+  const handleOnDelete = (index) => {
+    const updatedList = list.filter((item, i) => i !== index);
+    setList(updatedList);
+  };
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -28,7 +33,10 @@ function App() {
         <div className="list">
           <ul>
             {list.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i}>
+                {item}
+                <button onClick={() => handleOnDelete(i)}>Delete</button>
+              </li>
             ))}
           </ul>
         </div>
