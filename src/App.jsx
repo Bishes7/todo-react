@@ -2,23 +2,30 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [list, setList] = useState([]);
+  // first make a state to store a task typed by the users
   const [task, setTask] = useState("");
+  // lets make a list to store the attay of the tasks
+  const [list, setList] = useState([]);
 
-  const handleonSubmit = (e) => {
-    e.preventDefault();
-    if (task.trim()) {
-      setList([...list, { text: task, isCompleted: false }]);
-      setTask("");
-    }
+  const handleOnchange = (e) => {
+    const { value } = e.target;
+    setTask(value);
   };
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    setList([...list, { text: task, isCompleted: false }]);
+    setTask("");
+  };
+
+  // lets add a delete functionality
   const handleOnDelete = (index) => {
     const updatedList = list.filter((item, i) => i !== index);
     setList(updatedList);
   };
 
-  // Add a toggle Completed function
+  // now lets add a toggle completed function
+
   const toggleCompleted = (index) => {
     const updatedList = list.map((item, i) =>
       i === index ? { ...item, isCompleted: !item.isCompleted } : item
@@ -29,14 +36,14 @@ function App() {
   return (
     <div className="wrapper">
       <div className="container">
-        <form onSubmit={handleonSubmit}>
+        <form onSubmit={handleOnSubmit}>
           <input
             type="text"
-            value={task}
             placeholder="Add Task"
-            onChange={(e) => setTask(e.target.value)}
+            value={task}
+            onChange={handleOnchange}
           />
-          <button type="submit">Add Task</button>
+          <button>Add Task</button>
         </form>
         <div className="list">
           <ul>
@@ -49,7 +56,8 @@ function App() {
               >
                 {item.text}
                 <button onClick={() => toggleCompleted(i)}>
-                  {item.isCompleted ? "undo" : "completed"}
+                  {" "}
+                  {item.isCompleted ? "Completed" : "Mark"}
                 </button>
                 <button onClick={() => handleOnDelete(i)}>Delete</button>
               </li>
